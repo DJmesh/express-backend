@@ -167,8 +167,10 @@ Cria um novo usuário com nome, email e senha. Exemplo:
   "senha": "minhaSenhaSegura"
 }
 ```
-Exemplo de Rota Protegida: **GET /api/user/profile**
+Exemplo de Rota Protegida: 
+**GET /api/user/profile**
 É necessário enviar o token no cabeçalho Authorization. Se o token for válido, retorna as informações do perfil.
+
 ---
 
 ## Observações
