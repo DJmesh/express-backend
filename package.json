@@ -8,7 +8,8 @@
     "dev": "nodemon src/server.js",
     "db:migrate": "npx sequelize db:migrate",
     "db:seed": "npx sequelize db:seed:all",
-    "db:rollback": "npx sequelize db:migrate:undo"
+    "db:rollback": "npx sequelize db:migrate:undo",
+    "db:rollback:all": "npx sequelize db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
