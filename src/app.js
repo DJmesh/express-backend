@@ -4,24 +4,22 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const { connectDB } = require('./config/db');
 
-// Carrega variáveis de ambiente
 require('./config/env');
-
-// Conecta ao PostgreSQL
 connectDB();
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// Middlewares (CORS configurado corretamente)
+app.use(cors({
+  origin: '*',
+}));
+
 app.use(express.json());
 
-// Rotas dos módulos existentes
+// Rotas existentes
 const authRoutes = require('./modules/auth/auth.routes');
 const adminRoutes = require('./modules/admin/admin.routes');
 const userRoutes = require('./modules/user/user.routes');
-
-// Rotas do novo módulo Incident
 const incidentRoutes = require('./modules/incident/incident.routes');
 
 app.use('/api/auth', authRoutes);
