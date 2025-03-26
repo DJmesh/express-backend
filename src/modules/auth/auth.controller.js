@@ -5,7 +5,7 @@ const { User } = require('../../models');
 const secretKey = process.env.JWT_SECRET || 'sua_chave_secreta';
 
 exports.register = async (req, res) => {
-  const { nome, email, senha } = req.body;
+  const { email, senha, nome, cpf, birthdate, address } = req.body;
   try {
     let user = await User.findOne({ where: { email } });
     if (user) return res.status(400).json({ message: 'Email já cadastrado' });
@@ -17,6 +17,9 @@ exports.register = async (req, res) => {
       nome,
       email,
       senha: hashedPassword,
+      cpf,
+      birthdate,
+      address
     });
 
     res.status(201).json({ message: 'Usuário cadastrado com sucesso' });

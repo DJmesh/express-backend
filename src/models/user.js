@@ -1,4 +1,3 @@
-// src/models/user.js
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
@@ -21,6 +20,23 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false, 
       defaultValue: 'user' 
     },
+    birthdate: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    cpf: { 
+      type: DataTypes.STRING, 
+      allowNull: false, 
+      unique: true 
+    },
+    locationId: { 
+      type: DataTypes.INTEGER, 
+      allowNull: true,
+      references: {
+        model: 'locations', // Nome da tabela de localizações
+        key: 'id'
+      }
+    }
   }, {
     tableName: 'users',
     timestamps: true
@@ -29,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
   // Se desejar associar o usuário às ocorrências:
   User.associate = (models) => {
     User.hasMany(models.Incident, { foreignKey: 'userId', as: 'incidents' });
+    User.belongsTo(models.Location, { foreignKey: 'locationId', as: 'location' });
   };
 
   return User;

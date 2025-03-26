@@ -3,26 +3,30 @@
 
 module.exports = (sequelize, DataTypes) => {
   const Location = sequelize.define('Location', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
+    nome: { 
+      type: DataTypes.STRING, 
+      allowNull: false 
     },
-    latitude: {
-      type: DataTypes.DECIMAL(10, 7),
-      allowNull: true
+    cidade: { 
+      type: DataTypes.STRING, 
+      allowNull: false 
     },
-    longitude: {
-      type: DataTypes.DECIMAL(10, 7),
-      allowNull: true
+    estado: { 
+      type: DataTypes.STRING, 
+      allowNull: false 
+    },
+    pais: { 
+      type: DataTypes.STRING, 
+      allowNull: false 
     }
   }, {
     tableName: 'locations',
     timestamps: true
   });
 
+  // Se precisar associar a localização a outras entidades
   Location.associate = (models) => {
-    // Um local pode ter várias ocorrências
-    Location.hasMany(models.Incident, { foreignKey: 'locationId', as: 'incidents' });
+    Location.hasMany(models.User, { foreignKey: 'locationId', as: 'users' });
   };
 
   return Location;
