@@ -10,6 +10,8 @@ async function register(req, res) {
     const { nome, email, senha, role, birthdate, cpf, cep } = req.body;
 
     let address = null, bairro = null, localidade = null, uf = null;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(senha, salt);
 
     // Se o CEP for informado, buscar os dados na API ViaCEP
     if (cep) {
@@ -26,7 +28,7 @@ async function register(req, res) {
     const user = await User.create({
       nome,
       email,
-      senha, 
+      senha: hashedPassword, 
       role,
       birthdate,
       cpf,
