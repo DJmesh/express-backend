@@ -25,15 +25,8 @@ const authController = require('./auth.controller');
  *                 type: string
  *               birthdate:
  *                 type: string
- *               location:
- *                 type: object
- *                 properties:
- *                   name:
- *                     type: string
- *                   latitude:
- *                     type: number
- *                   longitude:
- *                     type: number
+ *               cep: 
+ *                  type: string
  *     responses:
  *       201:
  *         description: Usuário cadastrado com sucesso.

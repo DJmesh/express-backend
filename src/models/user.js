@@ -29,24 +29,30 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false, 
       unique: true 
     },
-    locationId: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true,
-      references: {
-        model: 'locations', // Nome da tabela de localizações
-        key: 'id'
-      }
+    cep: { 
+      type: DataTypes.STRING, 
+      allowNull: true 
+    },
+    address: { // Logradouro
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    bairro: { // Bairro
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    localidade: { // Cidade
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    uf: { // Estado
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'users',
     timestamps: true
   });
-
-  // Se desejar associar o usuário às ocorrências:
-  User.associate = (models) => {
-    User.hasMany(models.Incident, { foreignKey: 'userId', as: 'incidents' });
-    User.belongsTo(models.Location, { foreignKey: 'locationId', as: 'location' });
-  };
 
   return User;
 };
