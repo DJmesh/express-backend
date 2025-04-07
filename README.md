@@ -41,6 +41,109 @@ bblack_box/
 └── package.json          // Dependências e scripts (start, dev, db:migrate, db:seed, etc.)
 ```
 
+###  Diagrama de Fluxo de Dados (Mermaid)
+
+erDiagram
+    USER ||--o{ INCIDENT : "possui"
+    INCIDENT ||--|{ INCIDENT_IMAGE : "tem"
+    INCIDENT }|--|| LOCATION : "ocorre em"
+
+    USER {
+        int id PK
+        string nome
+        string email
+        string senha
+        enum role
+        string birthdate
+        string cpf
+        string cep
+        string address
+        string bairro
+        string localidade
+        string uf
+    }
+
+    INCIDENT {
+        int id PK
+        string title
+        int userId FK
+        int locationId FK
+    }
+
+    INCIDENT_IMAGE {
+        int id PK
+        string url
+        int incidentId FK
+    }
+
+    LOCATION {
+        int id PK
+        string nome
+        string cidade
+        string estado
+        string pais
+    }
+
+
+### Diagrama da Estrutura do Projeto (Mermaid)
+
+graph TD
+  A[bbBlack_Box] --> B[config/]
+  B --> B1[config.json]
+  B --> B2[migrations/]
+  B --> B3[seeders/]
+
+  A --> C[src/]
+  C --> C1[app.js]
+  C --> C2[server.js]
+  C --> C3[config/]
+  C3 --> C4[db.js]
+  C3 --> C5[env.js]
+  C3 --> C6[swagger.js]
+  C3 --> C7[imports/index.js]
+
+  C --> D[middleware/]
+  D --> D1[auth.js]
+  D --> D2[errorHandler.js]
+
+  C --> E[models/]
+  E --> E1[index.js]
+  E --> E2[user.js]
+  E --> E3[incident.js]
+  E --> E4[incidentImage.js]
+  E --> E5[location.js]
+
+  C --> F[modules/]
+  F --> F1[auth/]
+  F1 --> F1a[auth.controller.js]
+  F1 --> F1b[auth.routes.js]
+  F --> F2[user/]
+  F2 --> F2a[user.controller.js]
+  F2 --> F2b[user.routes.js]
+
+  C --> G[utils/]
+
+  A --> H[.env]
+  A --> I[.gitignore]
+  A --> J[package.json]
+
+##  Arquitetura do Projeto (MVC)
+
+Este projeto segue a arquitetura **MVC (Model-View-Controller)**, separando responsabilidades para manter o código limpo e escalável:
+
+- **Models**: Definem a estrutura dos dados e as associações no banco de dados, usando Sequelize.
+- **Controllers**: Contêm a lógica de negócio e controlam o fluxo das requisições.
+- **Routes (Views)**: Definem os endpoints disponíveis na API e direcionam as requisições para os controllers.
+
+Essa separação permite:
+- Manutenção facilitada
+- Reutilização de código
+- Testabilidade
+- Escalabilidade
+
+Além disso, o projeto conta com middlewares reutilizáveis, Swagger para documentação da API, seeders/migrations organizados, e variáveis de ambiente via dotenv.
+
+
 ### Principais Pastas e Arquivos
 
 - **config/** (na raiz):  
