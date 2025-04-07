@@ -43,6 +43,7 @@ bblack_box/
 
 ###  Diagrama de Fluxo de Dados (Mermaid)
 
+```mermaid
 erDiagram
     USER ||--o{ INCIDENT : "possui"
     INCIDENT ||--|{ INCIDENT_IMAGE : "tem"
@@ -83,11 +84,12 @@ erDiagram
         string estado
         string pais
     }
-
+```
 
 ### Diagrama da Estrutura do Projeto (Mermaid)
 
-graph TD
+```mermaid
+flowchart TD
   A[bbBlack_Box] --> B[config/]
   B --> B1[config.json]
   B --> B2[migrations/]
@@ -126,6 +128,7 @@ graph TD
   A --> H[.env]
   A --> I[.gitignore]
   A --> J[package.json]
+```
 
 ##  Arquitetura do Projeto (MVC)
 
